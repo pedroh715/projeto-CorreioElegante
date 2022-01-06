@@ -1,0 +1,1 @@
+Olá, esse projeto de app mobile "correio elegante" foi desenvolvido com o fim de estudar o framework de javascript "React.js"
