@@ -5,41 +5,15 @@ import {
   View, 
   StyleSheet,
   TextInput,
-  Keyboard,
+  TouchableOpacity,
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-
-/* IMAGENS */
-import champagne from '../../assets/champagne.png';
-import cheese from '../../assets/cheese.png';
-import fastFood from '../../assets/fast-food.png';
-import french from '../../assets/french.png';
 
 import Scroll from './components/Explore/Scroll'
 import Btn from '../Register/components/Btn/Btn'
 
 const Register = () => {
-
-  const [visible, setVisible] = useState(true)
-
-  useEffect(() => {
-    
-    const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      () => setVisible(false),
-    );
-
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      () => setVisible(true),
-    )
-
-    return () => {
-      keyboardDidShowListener.remove()
-      keyboardDidHideListener.remove()
-    }
-  }, [])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -70,6 +44,7 @@ const Register = () => {
               Escolha uma refeição abaixo
             </Text>
             <View style={{height: 91}}>
+              
               <ScrollView
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
@@ -78,6 +53,7 @@ const Register = () => {
                 <Scroll imageUri={require('../../assets/champagne.png')}/>    
                 <Scroll imageUri={require('../../assets/cheese.png')}/>    
                 <Scroll imageUri={require('../../assets/french.png')}/>    
+
               </ScrollView>
             </View>
           </View>
@@ -109,8 +85,17 @@ const Register = () => {
           </View>
         </View>
         
-        <Btn marginBottom={30}></Btn>
-
+  
+        <TouchableOpacity style={[styles.button, {marginBottom:30}]}>
+            <LinearGradient 
+            colors={['#E06C88', '#B73058']} 
+            style={[styles.button, {marginTop: 0}]}
+            useAngle={true}
+            angle={130}
+            >
+            <Text style={[styles.textButton]}>COMEÇAR</Text>
+            </LinearGradient>
+          </TouchableOpacity>
 
 
       </View>
@@ -142,7 +127,7 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 20,
-    fontFamily: 'Poppins',
+    fontFamily: 'Poppins-Bold',
     fontWeight: '700',
     color: '#2F394B',
     marginBottom:20,
@@ -163,6 +148,20 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     fontWeight: '700',
     paddingLeft: 10
+  },
+  textButton: {
+    fontSize: 20,
+    fontFamily: 'Roboto',
+    color: '#FFF',
+    fontWeight: '700',
+  },
+    button: {
+    width: 295,
+    height: 60,
+    backgroundColor: '#000',
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 })
 

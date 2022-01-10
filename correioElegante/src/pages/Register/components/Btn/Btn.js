@@ -7,11 +7,9 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 
-class Btn extends Component {
-    render() {
+export default function Btn(){
         return(
             <TouchableOpacity style={[styles.button, {
-                marginBottom: this.props.marginBottom
             }]}>
             <LinearGradient 
             colors={['#E06C88', '#B73058']} 
@@ -24,7 +22,6 @@ class Btn extends Component {
           </TouchableOpacity>
         )
     }
-}
 
 const styles = StyleSheet.create({
     textButton: {
@@ -42,5 +39,3 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     }
 })
-
-export default Btn

@@ -7,8 +7,6 @@ import {
 
 import { TouchableHighlight } from 'react-native-gesture-handler'
 
-    
-
 class Scroll extends Component {
     _onPress() {
         borderWidth: 2
@@ -19,7 +17,6 @@ class Scroll extends Component {
             
             <View style={{marginLeft: 13}}>
                 <View>
-
                 <TouchableHighlight>
                         <Image source={this.props.imageUri} style={{marginLeft: this.props.marginLeft}}/>     
                 </TouchableHighlight>

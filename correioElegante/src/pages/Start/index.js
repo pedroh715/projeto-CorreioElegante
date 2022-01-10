@@ -8,18 +8,16 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-
+import Btn from '../Register/components/Btn/Btn'
 
 /* IMAGENS */
 import imageTop from '../../assets/imageTop.png'
+import LinearGradient from 'react-native-linear-gradient';
 
-const Start = ({navigation}) => {
-  const entrar = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{name: "Register"}]
-    })
-  }
+
+export default function Start(props) {
+  
+
   return (
     <View style={styles.container}>
       
@@ -46,10 +44,21 @@ const Start = ({navigation}) => {
         }]}>
           Envie mensagens e presentes incríveis</Text>
 
-        <Btn onPress={() => entrar()}/>
+          <TouchableOpacity style={[styles.button, {
+            }]} onPress={() => props.navigation.navigate('Register')} >
+            <LinearGradient 
+            colors={['#E06C88', '#B73058']} 
+            style={[styles.button, {marginTop: 0}]}
+            useAngle={true}
+            angle={130}
+            >
+            <Text style={[styles.textButton]}>COMEÇAR</Text>
+            </LinearGradient>
+          </TouchableOpacity>
             
       </View>
     </View>
+
   ); 
 };
 
@@ -71,8 +80,20 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 40,
   },
+  textButton: {
+    fontSize: 20,
+    fontFamily: 'Roboto',
+    color: '#FFF',
+    fontWeight: '700',
+  },
+    button: {
+    width: 295,
+    height: 60,
+    backgroundColor: '#000',
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 
  
 })
-
-export default Start; 
