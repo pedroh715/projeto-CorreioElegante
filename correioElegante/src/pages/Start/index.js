@@ -44,8 +44,7 @@ export default function Start(props) {
         }]}>
           Envie mensagens e presentes incríveis</Text>
 
-          <TouchableOpacity style={[styles.button, {
-            }]} onPress={() => props.navigation.navigate('Register')} >
+          <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('Register')} >
             <LinearGradient 
             colors={['#E06C88', '#B73058']} 
             style={[styles.button, {marginTop: 0}]}

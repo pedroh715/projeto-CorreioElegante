@@ -8,13 +8,19 @@ import {
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
+  TouchableHighlight,
+  Pressable,
+  Alert,
 } from 'react-native';
 
 import Scroll from './components/Explore/Scroll'
 import Btn from '../Register/components/Btn/Btn'
 
-const Register = () => {
+const Register = (props) => {
 
+  const [errorEmail, setErrorEmail] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
+ 
   return (
     <SafeAreaView style={styles.container}>
     
@@ -49,8 +55,9 @@ const Register = () => {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
               >
+              
                 <Scroll imageUri={require('../../assets/fast-food.png')} marginLeft={19}/>    
-                <Scroll imageUri={require('../../assets/champagne.png')}/>    
+                <Scroll imageUri={require('../../assets/champagne.png')}/>                    
                 <Scroll imageUri={require('../../assets/cheese.png')}/>    
                 <Scroll imageUri={require('../../assets/french.png')}/>    
 
@@ -86,14 +93,14 @@ const Register = () => {
         </View>
         
   
-        <TouchableOpacity style={[styles.button, {marginBottom:30}]}>
+        <TouchableOpacity style={[styles.button, {marginBottom:30}]} onPress={() => props.navigation.navigate('Confirmation')}  >
             <LinearGradient 
             colors={['#E06C88', '#B73058']} 
             style={[styles.button, {marginTop: 0}]}
             useAngle={true}
             angle={130}
             >
-            <Text style={[styles.textButton]}>COMEÇAR</Text>
+            <Text style={[styles.textButton]}>ENVIAR CORREIO</Text>
             </LinearGradient>
           </TouchableOpacity>
 
@@ -162,6 +169,13 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  press: {
+    borderWidth: 2,
+    borderColor: '#000'
+  },
+  normal: {
+    borderWidth: 0
   }
 })
 
