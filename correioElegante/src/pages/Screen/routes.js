@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import Home from '../Start/index'
 import Register from '../Register/register'

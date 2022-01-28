@@ -8,11 +8,10 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import Btn from '../Register/components/Btn/Btn'
-
 /* IMAGENS */
 import imageTop from '../../assets/imageTop.png'
 import LinearGradient from 'react-native-linear-gradient';
+import 'react-native-gesture-handler';
 
 
 export default function Start(props) {

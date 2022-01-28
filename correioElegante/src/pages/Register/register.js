@@ -10,17 +10,60 @@ import {
   ScrollView,
   TouchableHighlight,
   Pressable,
-  Alert,
 } from 'react-native';
 
 import Scroll from './components/Explore/Scroll'
-import Btn from '../Register/components/Btn/Btn'
+
+const isValidObjField = (obj) => {
+  return Object.values(obj).every(value => value.trim())
+}
+
+const updateError = (error, stateUpdater) => {
+  stateUpdater(error)
+  setTimeout(() => {
+    stateUpdater('')
+  }, 2500 )
+}
+
+const isValidEmail = (value) => {
+  const regx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  return regx.test(value)
+}
+
 
 const Register = (props) => {
+  const [userInfo, setUserInfo] = useState({
+    email: '',
+    msg: '',
+    nome: ''
+  })
 
-  const [errorEmail, setErrorEmail] = useState(null)
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [error, setError] = useState('')
+
+  const {email, msg, nome} = userInfo
+
+  var aux = false
+
+  const handleOnChangeText = (value, fieldName) => {
+    setUserInfo({...userInfo, [fieldName]: value
+    })
+  }
+
+  const isValidForm = () => {
+    if(!isValidEmail(email)) return updateError('Email inválido', setError)
+    if(!msg.trim() || msg.length < 5)  return updateError('Sua mensagem precisa ter 5 caracteres ou mais', setError)
+
+    return true;
+  }
+
+  const submitForm = () => {
+    if(isValidForm()) {
+      aux = true
+    }
+  }
+
  
+
   return (
     <SafeAreaView style={styles.container}>
     
@@ -30,8 +73,10 @@ const Register = (props) => {
           <Text style={styles.subTitle}>
             Você gostaria de se identificar?  
           </Text>
-          <TextInput style={styles.input} placeholder='Digite seu nome ou apelido' placeholderTextColor="#8D8D8D"></TextInput>
+          <TextInput style={styles.input} onChangeText={(value) => handleOnChangeText(value, 'nome')} value={nome} placeholder='Digite seu nome ou apelido' placeholderTextColor="#8D8D8D"></TextInput>
         </View>
+
+        
 
       </View>
 
@@ -41,6 +86,12 @@ const Register = (props) => {
         borderTopRightRadius: 35,
         borderTopLeftRadius: 35,
       }]}>
+
+        {error ? (
+          <Text style={{color: 'red', fontSize: 15, textAlign: 'center', marginTop: 5}}>
+            {error}
+          </Text>
+        ): null}
         
         <ScrollView scrollEventThrottle={4}>
           <View>
@@ -66,7 +117,7 @@ const Register = (props) => {
           </View>
         </ScrollView>
         
-        <View style={{alignItems: 'center', marginBottom: 32}}>
+        <View style={{alignItems: 'center', marginBottom: 20}}>
           <View style={{width: 323}}>
             <Text style={[styles.title, {paddingHorizontal: 0, marginBottom: 4}]}>
               Email
@@ -74,7 +125,20 @@ const Register = (props) => {
             <TextInput style={[styles.input, {
               borderWidth: 2,
               borderColor: '#B73058'
-            }]} placeholder='Digite o email dele ou dela' placeholderTextColor="#8D8D8D"></TextInput>
+            }]} 
+                value={email}
+                onChangeText={(value) => handleOnChangeText(value, 'email')}
+                placeholder='Digite o email dele ou dela'            
+                placeholderTextColor="#8D8D8D"
+                keyboardType='email-address'
+                autoCapitalize='none'
+                
+                />
+            
+            
+           
+            
+
           </View>
         </View>
 
@@ -88,23 +152,32 @@ const Register = (props) => {
               borderColor: '#B73058',
               height: 95,
               textAlignVertical: 'top',
-            }]} placeholder='Digite o email dele ou dela' placeholderTextColor="#8D8D8D"></TextInput>
+            }]} 
+              value={msg}
+              onChangeText={(value) => handleOnChangeText(value, 'msg')}
+              placeholder='Solte o verbo para seu/sua amado(a)'
+              placeholderTextColor="#8D8D8D"            
+              />
           </View>
         </View>
+       
+        <TouchableOpacity style={[styles.button, {marginBottom:30}]} onPress={(function() {
+          if (isValidForm()){
+            props.navigation.navigate('Confirmation', {userInfo})
+          } else {
+            return submitForm()
+          }
+        })}>
+        <LinearGradient 
+        colors={['#E06C88', '#B73058']} 
+        style={[styles.button, {marginTop: 0}]}
+        useAngle={true}
+        angle={130}
+        >
+          <Text style={[styles.textButton]}>ENVIAR CORREIO</Text>
+        </LinearGradient>
+        </TouchableOpacity> 
         
-  
-        <TouchableOpacity style={[styles.button, {marginBottom:30}]} onPress={() => props.navigation.navigate('Confirmation')}  >
-            <LinearGradient 
-            colors={['#E06C88', '#B73058']} 
-            style={[styles.button, {marginTop: 0}]}
-            useAngle={true}
-            angle={130}
-            >
-            <Text style={[styles.textButton]}>ENVIAR CORREIO</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-
-
       </View>
 
     </SafeAreaView>
@@ -118,6 +191,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#B73058",
     justifyContent: 'center',
     alignItems: 'center',
+  },
+
+  errorMsg: {
+    color: 'red',
   },
 
   containerTop: {

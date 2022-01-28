@@ -8,8 +8,6 @@ import {
     StyleSheet,
 } from 'react-native'
 
-import { TouchableHighlight, TouchableWithoutFeedback } from 'react-native-gesture-handler'
-
 class Scroll extends Component {
   render() {   
     return(
