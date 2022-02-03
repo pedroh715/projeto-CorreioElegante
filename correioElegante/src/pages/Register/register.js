@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
+import emailjs from 'emailjs-com'
+
 import { 
   Text, 
   View, 
@@ -71,9 +73,9 @@ const Register = (props) => {
 
         <View style={styles.identify}>
           <Text style={styles.subTitle}>
-            Você gostaria de se identificar?  
+            Você gostaria de se identificar
           </Text>
-          <TextInput style={styles.input} onChangeText={(value) => handleOnChangeText(value, 'nome')} value={nome} placeholder='Digite seu nome ou apelido' placeholderTextColor="#8D8D8D"></TextInput>
+          <TextInput style={styles.input} onChangeText={(value) => handleOnChangeText(value, 'nome')} value={nome} placeholder='Digite seu nome ou apelido' placeholderTextColor="#8D8D8D" ></TextInput>
         </View>
 
         
@@ -103,15 +105,14 @@ const Register = (props) => {
             <View style={{height: 91}}>
               
               <ScrollView
-                horizontal={true}
+                horizontal={true} 
                 showsHorizontalScrollIndicator={false}
               >
-              
+                
                 <Scroll imageUri={require('../../assets/fast-food.png')} marginLeft={19}/>    
                 <Scroll imageUri={require('../../assets/champagne.png')}/>                    
                 <Scroll imageUri={require('../../assets/cheese.png')}/>    
                 <Scroll imageUri={require('../../assets/french.png')}/>    
-
               </ScrollView>
             </View>
           </View>
@@ -131,16 +132,11 @@ const Register = (props) => {
                 placeholder='Digite o email dele ou dela'            
                 placeholderTextColor="#8D8D8D"
                 keyboardType='email-address'
-                autoCapitalize='none'
-                
+                autoCapitalize='none'            
                 />
-            
-            
-           
-            
-
           </View>
         </View>
+
 
         <View>
           <View style={{width: 323, marginBottom:30}}>
@@ -160,6 +156,7 @@ const Register = (props) => {
               />
           </View>
         </View>
+
        
         <TouchableOpacity style={[styles.button, {marginBottom:30}]} onPress={(function() {
           if (isValidForm()){
